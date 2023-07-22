@@ -11,7 +11,7 @@
         inherit system;
 
       };
-      kdesvn = (with pkgs; stdenv.mkDerivation {
+      kdesvn = (with pkgs; stdenv.mkDerivation rec {
         pname = "kdesvn";
         version = "2.0.0";
         src = fetchgit {
@@ -22,6 +22,11 @@
         patches = [
           ./import.patch
         ];
+        desktopItem = pkgs.makeDesktopItem {
+          name = "kdesvn";
+          desktopName = "kdesvn";
+          exec = "kdesvn";
+        };
         buildInputs = [
           subversionClient
           subversionClient.dev
@@ -54,6 +59,10 @@
           "-DSUBVERSION_INCLUDE_DIR=${subversionClient.dev}/include/subversion-1"
         ];
         buildPhase = "make -j $NIX_BUILD_CORES";
+        postInstall = ''
+          rm $out/share/applications/org.kde.kdesvn.desktop
+          cp --recursive ${desktopItem}/share/applications $out/share
+        '';
       });
     in rec {
       packages.kdesvn = kdesvn;
