@@ -4,6 +4,6 @@ See:
 - https://invent.kde.org/sdk/kdesvn
 
 **Usage:**
-```
+```nix
 (builtins.getFlake "github:xam090/kdesvn-flake/{commit-hash}").packages.x86_64-linux.default
 ```
