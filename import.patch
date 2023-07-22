@@ -1,0 +1,12 @@
+diff --git a/src/svnfrontend/blamedisplay.cpp b/src/svnfrontend/blamedisplay.cpp
+index 6fbc7d0e..345701de 100644
+--- a/src/svnfrontend/blamedisplay.cpp
++++ b/src/svnfrontend/blamedisplay.cpp
+@@ -30,6 +30,7 @@
+ #include <KTextEdit>
+ #include <KTreeWidgetSearchLine>
+ 
++#include <QAction>
+ #include <QBrush>
+ #include <QFontDatabase>
+ #include <QInputDialog>
