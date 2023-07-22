@@ -56,11 +56,13 @@
         buildPhase = "make -j $NIX_BUILD_CORES";
       });
     in rec {
-      defaultApp = flake-utils.lib.mkApp {
-        drv = defaultPackage;
+      packages.kdesvn = kdesvn;
+      packages.default = packages.kdesvn;
+      apps.kdesvn = flake-utils.lib.mkApp {
+        drv = packages.default;
       };
-      defaultPackage = kdesvn;
-      devShell = pkgs.mkShell {
+      app.default = apps.kdesvn;
+      devShells.default = pkgs.mkShell {
         buildInputs = [
           kdesvn
         ];
